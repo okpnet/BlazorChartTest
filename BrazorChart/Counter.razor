@@ -25,6 +25,7 @@
         </div>
         <div class="column is-half">
             <p>Rader</p>
+            <p>ClickString</p>
         </div>
         <div class="column is-half">
             <Chart Config="radarChartConfig" @ref="rader"></Chart>
@@ -41,6 +42,7 @@
     private RadarChartConfig radarChartConfig = new();
     private Chart _chart1=new();
     private Chart rader = new();
+    string ClickString { get; set; } = string.Empty;
     private void IncrementCount()
     {
         currentCount++;
@@ -100,15 +102,25 @@
             {
                 Options = new RadarOptions
                 {
-                    Scales = new RadarOptionsScales()
-                }
+                    Scales=new RadarOptionsScales
+                    {
+                        R=new RadarOptionsScalesRadius
+                        {
+                            Min=1,
+                            BeginAtZero=false
+                        }
+                    }
+                   
+                },
+
             };
         radarChartConfig.Data.Labels = list.Select(t => t.Name).ToList();
         radarChartConfig.Data.Datasets.Add(
             new RadarDataset()
             {
-Label="test",
-                    Data = list.Select(t => new decimal?(t.Value)).ToList()
+                    Label="test",
+                    Data = list.Select(t => new decimal?(t.Value)).ToList(),
+                    
             }
         );
     }
@@ -137,5 +149,12 @@ Label="test",
                 Fill = false
             };
         _chart1.AddDataset<BarDataset>(newdataset);
+    }
+    public ValueTask onClickAsync(CallbackGenericContext value)
+    {
+        ClickString = $"Dataset index: {value.DatasetIndex} - Value index: {value.DataIndex} - Value: {value.Value}";
+        StateHasChanged();
+
+        return ValueTask.CompletedTask;
     }
 }

@@ -14,7 +14,7 @@ namespace BrazorChart.Items
                 [
                     new() { Name = "A", Value = 5 },
                     new() {Name = "B", Value = 6 },
-                    new(){Name = "C", Value = 1 },
+                    new(){Name = "C", Value = 3 },
                     new(){Name="D", Value = 4 },
                 ];
         }
