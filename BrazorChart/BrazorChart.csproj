@@ -16,6 +16,7 @@
 	
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="8.0.80" />
+    <PackageReference Include="PSC.Blazor.Components.Chartjs" Version="8.0.6" />
   </ItemGroup>
 
 </Project>
