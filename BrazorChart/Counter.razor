@@ -52,7 +52,7 @@
     {
         // AddNewDataset();
         await base.OnInitializedAsync();
-
+      
         _config1 = new BarChartConfig()
             {
                 Options = new Options()
@@ -120,7 +120,10 @@
             {
                     Label="test",
                     Data = list.Select(t => new decimal?(t.Value)).ToList(),
-                    
+                    // BorderColor = "rgba(0, 184, 156,1.0)",//primary
+                    // BackgroundColor = "rgba(0, 184, 156,0.5)"//primary
+                    BorderColor = "rgba(76, 201, 255,1.0)",//primary
+                    BackgroundColor = "rgba(76, 201, 255,0.3)"//primary
             }
         );
     }
