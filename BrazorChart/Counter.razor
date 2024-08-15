@@ -11,6 +11,8 @@
 @using PSC.Blazor.Components.Chartjs.Models.Polar
 @using PSC.Blazor.Components.Chartjs.Models.Radar
 @using PSC.Blazor.Components.Chartjs.Models.Scatter
+@using System.Drawing
+@using QualCharts
 
 <section class="section">
     <h1>Counter</h1>
@@ -52,7 +54,7 @@
     {
         // AddNewDataset();
         await base.OnInitializedAsync();
-      
+
         _config1 = new BarChartConfig()
             {
                 Options = new Options()
@@ -98,22 +100,7 @@
                 BorderWidth = 1
             });
 
-        radarChartConfig = new RadarChartConfig
-            {
-                Options = new RadarOptions
-                {
-                    Scales=new RadarOptionsScales
-                    {
-                        R=new RadarOptionsScalesRadius
-                        {
-                            Min=1,
-                            BeginAtZero=false
-                        }
-                    }
-                   
-                },
-
-            };
+        radarChartConfig = (RadarChartConfig)ChartConfigFactory.CreateRaderConfig();
         radarChartConfig.Data.Labels = list.Select(t => t.Name).ToList();
         radarChartConfig.Data.Datasets.Add(
             new RadarDataset()
@@ -122,8 +109,8 @@
                     Data = list.Select(t => new decimal?(t.Value)).ToList(),
                     // BorderColor = "rgba(0, 184, 156,1.0)",//primary
                     // BackgroundColor = "rgba(0, 184, 156,0.5)"//primary
-                    BorderColor = "rgba(76, 201, 255,1.0)",//primary
-                    BackgroundColor = "rgba(76, 201, 255,0.3)"//primary
+                    BorderColor = ColorPallet.Default.Link.ToRgbaString(),//primary
+                    BackgroundColor = ColorPallet.Default.Danger.ToRgbaString(0.2)//primary
             }
         );
     }
